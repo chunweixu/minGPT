@@ -105,7 +105,7 @@ class MLP(nn.Module):
 
     def __init__(self, config):
         super.__init__()
-        self.c_fc = nn.Liner(config.n_embd, 4*config.n_embd)
+        self.c_fc = nn.Linear(config.n_embd, 4*config.n_embd)
         self.gelu = nn.GELU()
         self.c_proj = nn.Linear(4*config.n_embd, config.n_embd)
         self.dropout = nn.Dropout(config.dropout)
@@ -157,7 +157,7 @@ class GPT(nn.Module):
         self.lm_head = nn.Linear(config.n_embd, config.vocab_size, bias=False)
         # with weight tying when using torch.compile() some warnings get generated:
         # "UserWarning: functional_call was passed multiple values for tied weights.
-        # This behavior is deprecated and will be an error in future versions"
+        # This behavior is deprecated and will be an error in future versions"  
         # not 100% sure what this is, so far seems to be harmless. TODO investigate
         self.transformer.wte.weight = self.lm_head.weight # https://paperswithcode.com/method/weight-tying
 
