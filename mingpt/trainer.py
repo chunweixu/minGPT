@@ -62,7 +62,7 @@ class Trainer:
         model, config = self.model, self.config
 
         # setup the optimizer
-        self.optimizer = model.configure_optimizers(config)
+        self.optimizer = model.configure_optimizers(config.weight_decay, config.learning_rate, config.betas, self.device)
 
         # setup the dataloader
         train_loader = DataLoader(
